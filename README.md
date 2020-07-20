@@ -1,5 +1,16 @@
 "# halitev4"
+# TODO :
 
+## Fonctions d'utils :
+
+Class Board : Récupère toute la liste des infos 
+
+Class Ship : un uid fixe tout au long de la partie / Ennemis tués/ Halite/
+
+Class Shipyard : un uid fixe tout au long de la partie / Cb de vaisseau il crée / halite récupéré ...
+
+
+# IDEAS :
 ## Learning to act by predicting the future :
 
 Un agent pour les vaisseaux et un agent pour les shipyards
