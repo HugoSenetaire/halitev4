@@ -85,12 +85,13 @@ class Shipyard(Unit):
 class Board():
     def __init__(self, obs, config):
         self.map_to_ship = {} #For each player, ship_id
-        self.current_player =
+        # self.current_player =
 
 
     def check_actualisation(self, obs):
-        """ Actualisation is made without the observation. Make sure everything works""""
+        """ Actualisation is made without the observation. Make sure everything works"""
         raise NotImplementedError
+
     def actualise(self, obs, config, actions):
         # Need to get which move was played by the opponents 
         raise NotImplementedError
