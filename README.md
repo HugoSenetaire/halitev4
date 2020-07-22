@@ -53,3 +53,7 @@ valeur de chaque force donné par un vaisseau mère
 - Construire un shipyard detruit la halite a cette case => construire des shipyards sur les meilleures cases adverses
 - Construire un ship dans un shipyard juste avant qu'un vaisseau ennemi essaie de lui rentrer dedans
 - Attention : construciton des ships dans un shipyard se fait en premier, donc si un autre ship essaie de déposer de la halite dans le shipyard a ce moment il est détruit
+
+## Algo génétique
+
+- [Lien utile](https://www.kaggle.com/c/halite/discussion/159843) pour faire des tournois entre différentes versions de nos bots et évaluer leurs performances (d'une manière proche du classement Kaggle) => permet de séléctionner (et ensuite evoluer) nos meilleurs bots pour l'algo génétique
