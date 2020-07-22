@@ -3,6 +3,96 @@ import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 
 
+class Unit():
+    """ Abstract class for any unit in Halite """
+    
+
+    def __init__(self, id, pos, player_id):
+        self.id = id # Unique Id during a whole game
+        self.pos = pos # pos
+        self.player_id = player_id
+
+
+        self.is_alive = True
+        self.objective = None
+
+    def _actualise(self, is_alive):
+        self.is_alive = is_alive
+
+    def _set_objective(self, objective):
+        raise NotImplementedError
+
+    def get_available_action(self):
+        raise NotImplementedError
+
+
+
+
+class Ship(Unit):
+    def __init__(self, id, pos, player_id, mothershipyard = None):
+        super(Ship, self).__init__(id, pos, player_id)
+
+        self.mothershipyard = mothershipyard
+            
+        self.halite_cargo = 0
+        self.stolen_halite = 0
+        self.collected_halite = 0
+        self.dropped_halite = 0
+
+
+
+    def _actualise(self,
+        is_alive = True,
+        add_halite_cargo = 0,
+        add_stolen_halite = 0,
+        add_collected_halite = 0,
+        add_dropped_halite = 0
+        ):
+        """ Actualisation of all the parameters (called by Board) """
+
+        super(Ship, self)._actualise(is_alive = is_alive)
+
+        self.halite_cargo += add_halite_cargo
+        self.stolen_halite += add_stolen_halite
+        self.stored_halite += add_stored_halite
+        self.dropped_halite += add_dropped_halite
+
+class Shipyard(Unit):
+    def __init__(self, id, pos, player_id, mothership_id):
+        super(Shipyard, self).__init__(id, pos, player_id)
+
+        self.mothership_id = mothership_id
+
+        self.generated_ships = 0
+        self.stored_halite = 0
+
+
+    def _actualise(self,
+        is_alive=False, 
+        add_generated_ships=0, 
+        add_stored_halite=0
+        ):
+        """ Actualisation of all the parameters (called by Board) """
+        super(Shipyard, self)._actualise(is_alive = is_alive)
+
+        self.generated_ships += add_generated_ships
+        self.stored_halite += add_stored_halite
+
+
+class Board():
+    def __init__(self, obs, config):
+        self.map_to_ship = {} #For each player, ship_id
+        self.current_player =
+
+
+    def check_actualisation(self, obs):
+        """ Actualisation is made without the observation. Make sure everything works""""
+        raise NotImplementedError
+    def actualise(self, obs, config, actions):
+        # Need to get which move was played by the opponents 
+        raise NotImplementedError
+        
+
 def get_map_and_average_halite(obs):
     """
         get average amount of halite per halite source
