@@ -1,16 +1,17 @@
 "# halitev4"
+
 # TODO :
 
 ## Fonctions d'utils :
 
-Class Board : Récupère toute la liste des infos 
+Class Board : Récupère toute la liste des infos
 
 Class Ship : un uid fixe tout au long de la partie / Ennemis tués/ Halite/
 
 Class Shipyard : un uid fixe tout au long de la partie / Cb de vaisseau il crée / halite récupéré ...
 
-
 # IDEAS :
+
 ## Learning to act by predicting the future :
 
 Un agent pour les vaisseaux et un agent pour les shipyards
@@ -45,3 +46,10 @@ valeur de chaque force donné par un vaisseau mère
 ## Implémentation Learning to Act
 
 - https://flyyufelix.github.io/2017/11/17/direct-future-prediction.html
+
+## Stratégies de jeu :
+
+- Construire un shipyard déponse instantanément la halite AVANT les collisions => maneuvre d'urgence intéressante
+- Construire un shipyard detruit la halite a cette case => construire des shipyards sur les meilleures cases adverses
+- Construire un ship dans un shipyard juste avant qu'un vaisseau ennemi essaie de lui rentrer dedans
+- Attention : construciton des ships dans un shipyard se fait en premier, donc si un autre ship essaie de déposer de la halite dans le shipyard a ce moment il est détruit

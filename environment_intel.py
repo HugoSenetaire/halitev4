@@ -2,6 +2,9 @@
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 
+## Je pense qu'on peut faire heriter nos classes des classes implémentés dans le SDK, comme ca on bénéficie de leur API
+## ca pose peut etre des soucis, auquel cas laisse tomber c'est pas grave
+## cf : https://github.com/Kaggle/kaggle-environments/blob/master/kaggle_environments/envs/halite/helpers.py#L350
 
 class Unit():
     """ Abstract class for any unit in Halite """
