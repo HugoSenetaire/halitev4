@@ -1,6 +1,8 @@
 
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+import kaggle_environments.envs.halite.helpers as halite
+from typing import *
 
 ## Je pense qu'on peut faire heriter nos classes des classes implémentés dans le SDK, comme ca on bénéficie de leur API
 ## ca pose peut etre des soucis, auquel cas laisse tomber c'est pas grave
@@ -31,11 +33,11 @@ class Unit():
 
 
 
-class Ship(Unit):
-    def __init__(self, id, pos, player_id, mothershipyard = None):
-        super(Ship, self).__init__(id, pos, player_id)
+class Ship(halite.Ship):
+    def __init__(self, ship_id: halite.ShipId, position: halite.Point, halite: int, player_id: halite.PlayerId, board: 'Board', next_action: Optional[halite.ShipAction] = None) -> None:
+        super(Ship, self).__init__(ship_id, position, halite, player_id, board, next_action)
 
-        self.mothershipyard = mothershipyard
+        # self.mothershipyard = mothershipyard
             
         self.halite_cargo = 0
         self.stolen_halite = 0
@@ -59,6 +61,10 @@ class Ship(Unit):
         self.stolen_halite += add_stolen_halite
         self.stored_halite += add_stored_halite
         self.dropped_halite += add_dropped_halite
+    
+    
+    def custom_method(self):
+        print("THis is an instance of the custom class")
 
 class Shipyard(Unit):
     def __init__(self, id, pos, player_id, mothership_id):
@@ -82,19 +88,36 @@ class Shipyard(Unit):
         self.stored_halite += add_stored_halite
 
 
-class Board():
+class Board(halite.Board):
     def __init__(self, obs, config):
         self.map_to_ship = {} #For each player, ship_id
+        super(Board, self).__init__(obs,config)
         # self.current_player =
 
 
     def check_actualisation(self, obs):
         """ Actualisation is made without the observation. Make sure everything works"""
         raise NotImplementedError
-
+        
     def actualise(self, obs, config, actions):
         # Need to get which move was played by the opponents 
         raise NotImplementedError
+    
+    # We override the basic _add_ship methods called in the constructor of the halite.Board class so that the ships are instances of our custom Ship class (instead of the halite.Ship class)
+    # Need to make sure that the constructor of the base class actually calls this method instead of the base method (not sure about that)
+    def _add_ship(self: 'Board', ship: halite.Ship) -> None:
+        print("add_ship called with new function")
+        ship.player.ship_ids.append(ship.id)
+        ship.cell._ship_id = ship.id
+        self._ships[ship.id] = Ship(ship.id, ship.position, ship.halite, ship.player_id, self) #We create a Ship instance from our custom class
+    
+    # Same thing applies for _add_shipyard
+    def _add_shipyard(self: 'Board', shipyard: halite.Shipyard) -> None:
+        shipyard.player.shipyard_ids.append(shipyard.id)
+        shipyard.cell._shipyard_id = shipyard.id
+        shipyard.cell._halite = 0
+        self._shipyards[shipyard.id] = Shipyard(shipyard)
+
         
 
 def get_map_and_average_halite(obs):
