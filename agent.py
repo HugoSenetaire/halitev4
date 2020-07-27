@@ -16,11 +16,6 @@ def base_agent(observation, configuration):
 
     # Set actions for each ship
     for ship in me.ships:
-        # We check whether the ships are from our custom class
-        print(type(ship))
-        #We can call custom methods
-        ship.custom_method()
-        #The SDK methods also class because our custom class inherits from it
         ship.next_action = choice([halite.ShipAction.NORTH,halite.ShipAction.EAST,halite.ShipAction.SOUTH,halite.ShipAction.WEST,None])
         if len(me.shipyards)<1:
             ship.next_action = halite.ShipAction.CONVERT

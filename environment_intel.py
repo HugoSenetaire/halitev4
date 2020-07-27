@@ -62,9 +62,6 @@ class Ship(halite.Ship):
         self.stored_halite += add_stored_halite
         self.dropped_halite += add_dropped_halite
     
-    
-    def custom_method(self):
-        print("THis is an instance of the custom class")
 
 class Shipyard(halite.Shipyard):
     def __init__(self, *args, mothership_id=None):
@@ -105,7 +102,6 @@ class Board(halite.Board):
     # We override the basic _add_ship methods called in the constructor of the halite.Board class so that the ships are instances of our custom Ship class (instead of the halite.Ship class)
     # Need to make sure that the constructor of the base class actually calls this method instead of the base method (not sure about that)
     def _add_ship(self: 'Board', ship: halite.Ship) -> None:
-        print("add_ship called with new function")
         ship.player.ship_ids.append(ship.id)
         ship.cell._ship_id = ship.id
         self._ships[ship.id] = Ship(ship.id, ship.position, ship.halite, ship.player_id, self) #We create a Ship instance from our custom class
