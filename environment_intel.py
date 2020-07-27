@@ -34,8 +34,8 @@ class Unit():
 
 
 class Ship(halite.Ship):
-    def __init__(self, ship_id: halite.ShipId, position: halite.Point, halite: int, player_id: halite.PlayerId, board: 'Board', next_action: Optional[halite.ShipAction] = None) -> None:
-        super(Ship, self).__init__(ship_id, position, halite, player_id, board, next_action)
+    def __init__(self, *args) -> None:
+        super(Ship, self).__init__(*args)
 
         # self.mothershipyard = mothershipyard
             
@@ -67,8 +67,8 @@ class Ship(halite.Ship):
         print("THis is an instance of the custom class")
 
 class Shipyard(Unit):
-    def __init__(self, id, pos, player_id, mothership_id):
-        super(Shipyard, self).__init__(id, pos, player_id)
+    def __init__(self, *args, mothership_id=None):
+        super(Shipyard, self).__init__(*args)
 
         self.mothership_id = mothership_id
 
