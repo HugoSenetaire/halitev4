@@ -64,6 +64,8 @@ class Ship(halite.Ship):
     
 
 class Shipyard(halite.Shipyard):
+    # Is mothership_id usefull, is it not contained in the shipyard.player_id from the base class ?
+    # Or is it another info we want to store here ?
     def __init__(self, *args, mothership_id=None):
         super(Shipyard, self).__init__(*args)
         self.mothership_id = mothership_id
