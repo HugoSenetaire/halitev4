@@ -66,10 +66,9 @@ class Ship(halite.Ship):
     def custom_method(self):
         print("THis is an instance of the custom class")
 
-class Shipyard(Unit):
+class Shipyard(halite.Shipyard):
     def __init__(self, *args, mothership_id=None):
         super(Shipyard, self).__init__(*args)
-
         self.mothership_id = mothership_id
 
         self.generated_ships = 0
@@ -116,7 +115,7 @@ class Board(halite.Board):
         shipyard.player.shipyard_ids.append(shipyard.id)
         shipyard.cell._shipyard_id = shipyard.id
         shipyard.cell._halite = 0
-        self._shipyards[shipyard.id] = Shipyard(shipyard)
+        self._shipyards[shipyard.id] = Shipyard(shipyard.id, shipyard.position, shipyard.player_id, self)
 
         
 
